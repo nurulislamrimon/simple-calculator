@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+main {
+  width: 50%;
+  margin: 0 auto;
+}
+.btn-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 50px;
+  grid-gap: 10px;
+}
+.display {
+  height: 60px;
+  width: 100%;
+  border: 1px solid black;
+  margin: 10px 0;
+}
+.display > input {
+  height: 100%;
+  width: 100%;
+  font-size: x-large;
+  padding: 3px;
+}
+.plus {
+  grid-row: 2/4;
+  grid-column: 4/4;
+}
