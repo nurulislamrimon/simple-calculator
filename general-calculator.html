@@ -31,9 +31,9 @@
       <!-- general calculator start -->
       <!-- ======================== -->
       <section class="general-calculator-main-container">
-        <form class="display">
+        <div class="display">
           <input type="text" dir="rtl" autofocus pattern="[0-9]" />
-        </form>
+        </div>
         <div class="btn-container">
           <button value="reset">AC</button>
           <button value="back">🔙</button>
@@ -78,26 +78,47 @@
       const resetBtn = document.querySelector(
         ".general-calculator-main-container button[value=reset]"
       );
+
+      // handle submit
+      const handleSubmit = () => {
+        const expression = displayInput.value;
+        try {
+          const result = expression && eval(expression);
+          displayInput.value = result;
+          displayInput.focus();
+        } catch (error) {
+          displayInput.value = "Invalid input";
+          setTimeout(() => {
+            displayInput.value = 0;
+          }, 2000);
+        }
+      };
       // click executable buttons
       execuatableBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
           displayInput.value += e.target.value;
+          displayInput.focus();
         });
       });
       // submit button
-      submitBtn.addEventListener("click", () => {
-        const expression = displayInput.value;
-        const result = eval(expression);
-        displayInput.value = result;
-      });
+      submitBtn.addEventListener("click", handleSubmit);
       // backspace button
       backBtn.addEventListener("click", () => {
         const stringValue = displayInput.value.toString();
         displayInput.value = stringValue.substring(0, stringValue.length - 1);
+        displayInput.focus();
       });
       // reset button
       resetBtn.addEventListener("click", () => {
-        displayInput.value = "";
+        displayInput.value = 0;
+        displayInput.focus();
+      });
+
+      // key press listener
+      window.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          handleSubmit();
+        }
       });
     </script>
   </body>

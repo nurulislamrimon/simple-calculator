@@ -80,27 +80,46 @@ header {
 .general-calculator-main-container {
   width: 50%;
   margin: 0 auto;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 1px rgb(124, 5, 5), 2px 2px 1px cadetblue;
 
   & .btn-container {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: min(10vw, 50px);
+    grid-auto-rows: clamp(10px, 10vh, 50px);
     grid-gap: 10px;
+  }
+
+  & .btn-container > * {
+    border: none;
+    border-radius: 10px;
   }
 
   & .display {
     height: 60px;
     width: 100%;
-    border: 1px solid black;
     margin: 10px 0;
 
     & > input {
       height: 100%;
       width: 100%;
       font-size: x-large;
-      padding: 3px;
+      border-radius: 10px;
+      box-shadow: inset -1px -1px 1px rgb(124, 5, 5), 1px 1px 1px cadetblue;
+      padding: 0 10px;
     }
+  }
+
+  & .btn-container input[type="button"] {
+    background-color: thistle;
+    color: white;
+  }
+
+  & .btn-container button {
+    background-color: red;
+    color: white;
   }
 
   & .plus {
