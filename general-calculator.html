@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator N I Rimon</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <!-- hamburger -->
+        <input type="radio" id="hamburger" name="hamburger" />
+        <label for="hamburger" class="hamburger">
+          <span class="hamburger-element"></span>
+          <span class="hamburger-element"></span>
+          <span class="hamburger-element"></span>
+        </label>
+        <!-- close button -->
+        <input type="radio" id="close" name="hamburger" />
+        <label for="close">
+          <span class="hamburger-element"></span>
+          <span class="hamburger-element"></span>
+        </label>
+        <!-- navigations -->
+        <nav>
+          <a href="general-calculator.html">General calculator</a>
+        </nav>
+      </header>
+      <!-- ======================== -->
+      <!-- general calculator start -->
+      <!-- ======================== -->
+      <section class="general-calculator-main-container">
+        <div class="display">
+          <input type="text" dir="rtl" />
+        </div>
+        <div class="btn-container">
+          <input type="button" value="+" class="plus" />
+          <input type="button" value="%" />
+          <input type="button" value="/" />
+          <input type="button" value="*" />
+          <input type="button" value="-" />
+          <input type="button" value="7" />
+          <input type="button" value="8" />
+          <input type="button" value="9" />
+          <input type="button" value="4" />
+          <input type="button" value="5" />
+          <input type="button" value="6" />
+          <input type="button" value="1" />
+          <input type="button" value="2" />
+          <input type="button" value="3" />
+          <input type="submit" value="=" />
+        </div>
+      </section>
+      <!-- ======================== -->
+      <!-- general calculator end -->
+      <!-- ======================== -->
+    </main>
+    <footer>&copy;2024 N I Rimon</footer>
+    <!-- script -->
+    <script>
+      const display = document.querySelector(
+        "general-calculator-main-container .display>input"
+      );
+      const btns = document.querySelectorAll(
+        "general-calculator-main-container input[type=button]"
+      );
+      const submit = document.querySelector(
+        "general-calculator-main-container input[type=submit]"
+      );
+
+      btns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          display.value += e.target.value;
+        });
+      });
+      submit.addEventListener("click", () => {
+        const expression = display.value;
+        const result = eval(expression);
+        display.value = result;
+      });
+    </script>
+  </body>
+</html>
