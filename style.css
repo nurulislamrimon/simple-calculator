@@ -80,6 +80,7 @@ header {
 .general-calculator-main-container {
   width: 50%;
   margin: 0 auto;
+
   & .btn-container {
     width: 100%;
     display: grid;
@@ -87,11 +88,13 @@ header {
     grid-auto-rows: min(10vw, 50px);
     grid-gap: 10px;
   }
+
   & .display {
     height: 60px;
     width: 100%;
     border: 1px solid black;
     margin: 10px 0;
+
     & > input {
       height: 100%;
       width: 100%;
@@ -99,8 +102,9 @@ header {
       padding: 3px;
     }
   }
+
   & .plus {
-    grid-row: 2/4;
+    grid-row: 3/5;
     grid-column: 4/4;
   }
 }

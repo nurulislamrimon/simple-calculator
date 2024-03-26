@@ -31,25 +31,29 @@
       <!-- general calculator start -->
       <!-- ======================== -->
       <section class="general-calculator-main-container">
-        <div class="display">
-          <input type="text" dir="rtl" />
-        </div>
+        <form class="display">
+          <input type="text" dir="rtl" autofocus pattern="[0-9]" />
+        </form>
         <div class="btn-container">
-          <input type="button" value="+" class="plus" />
-          <input type="button" value="%" />
+          <button value="reset">AC</button>
+          <button value="back">🔙</button>
           <input type="button" value="/" />
           <input type="button" value="*" />
-          <input type="button" value="-" />
+          <input type="button" value="+" class="plus" />
           <input type="button" value="7" />
           <input type="button" value="8" />
           <input type="button" value="9" />
+          <input type="button" value="-" />
           <input type="button" value="4" />
           <input type="button" value="5" />
           <input type="button" value="6" />
           <input type="button" value="1" />
           <input type="button" value="2" />
           <input type="button" value="3" />
-          <input type="submit" value="=" />
+          <input type="button" value="0" />
+          <input type="button" value="." />
+          <input type="button" value="%" />
+          <button type="submit">=</button>
         </div>
       </section>
       <!-- ======================== -->
@@ -59,25 +63,41 @@
     <footer>&copy;2024 N I Rimon</footer>
     <!-- script -->
     <script>
-      const display = document.querySelector(
-        "general-calculator-main-container .display>input"
+      const displayInput = document.querySelector(
+        ".general-calculator-main-container .display>input"
       );
-      const btns = document.querySelectorAll(
-        "general-calculator-main-container input[type=button]"
+      const execuatableBtns = document.querySelectorAll(
+        ".general-calculator-main-container input[type=button]"
       );
-      const submit = document.querySelector(
-        "general-calculator-main-container input[type=submit]"
+      const submitBtn = document.querySelector(
+        ".general-calculator-main-container button[type=submit]"
       );
-
-      btns.forEach((btn) => {
+      const backBtn = document.querySelector(
+        ".general-calculator-main-container button[value=back]"
+      );
+      const resetBtn = document.querySelector(
+        ".general-calculator-main-container button[value=reset]"
+      );
+      // click executable buttons
+      execuatableBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
-          display.value += e.target.value;
+          displayInput.value += e.target.value;
         });
       });
-      submit.addEventListener("click", () => {
-        const expression = display.value;
+      // submit button
+      submitBtn.addEventListener("click", () => {
+        const expression = displayInput.value;
         const result = eval(expression);
-        display.value = result;
+        displayInput.value = result;
+      });
+      // backspace button
+      backBtn.addEventListener("click", () => {
+        const stringValue = displayInput.value.toString();
+        displayInput.value = stringValue.substring(0, stringValue.length - 1);
+      });
+      // reset button
+      resetBtn.addEventListener("click", () => {
+        displayInput.value = "";
       });
     </script>
   </body>
