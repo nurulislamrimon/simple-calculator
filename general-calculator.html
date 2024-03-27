@@ -24,7 +24,7 @@
         </label>
         <!-- navigations -->
         <nav>
-          <a href="general-calculator.html">General calculator</a>
+          <a href="age-calculator.html">Age Calculator</a>
         </nav>
       </header>
       <!-- ======================== -->
@@ -89,7 +89,7 @@
         } catch (error) {
           displayInput.value = "Invalid input";
           setTimeout(() => {
-            displayInput.value = 0;
+            displayInput.value = "";
           }, 2000);
         }
       };
@@ -110,7 +110,7 @@
       });
       // reset button
       resetBtn.addEventListener("click", () => {
-        displayInput.value = 0;
+        displayInput.value = "";
         displayInput.focus();
       });
 
