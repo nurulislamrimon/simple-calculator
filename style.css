@@ -132,6 +132,22 @@ header {
 .age-calculator-main-container {
   width: 50%;
   margin: 0 auto;
+  padding: 10px;
+  display: grid;
+  place-items: center;
+
+  .age-calculator-input-container {
+    display: grid;
+    grid-template-columns: 70px 140px 70px;
+    padding: 10px;
+    text-align: center;
+
+    input,
+    select {
+      padding: 5px;
+      font-size: medium;
+    }
+  }
 }
 
 footer {

@@ -31,7 +31,46 @@
       <!-- general calculator start -->
       <!-- ======================== -->
       <section class="age-calculator-main-container">
-        <input type="date" id="birth-date-input" />
+        <h2>Age Calculator</h2>
+        <h6>Enter your date of birth</h6>
+        <div
+          class="age-calculator-input-container"
+          onchange="getTheAgeCalculated()"
+          onkeyup="getTheAgeCalculated()"
+        >
+          <input
+            type="number"
+            id="birthdate-day"
+            placeholder="Day"
+            min="1"
+            max="31"
+          />
+          <select name="birthdate-month" id="birthdate-month">
+            <option value="" selected disabled>Select Month</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+          <input
+            type="number"
+            id="birthdate-year"
+            placeholder="Year"
+            min="1900"
+            max="2100"
+          />
+        </div>
+        <div class="age-display" id="age-display">
+          Hello dear! Enter your Birthdate please.
+        </div>
       </section>
       <!-- ======================== -->
       <!-- general calculator end -->
@@ -40,16 +79,61 @@
     <footer>&copy;2024 N I Rimon</footer>
     <!-- script -->
     <script>
-      const birthDateInput = document.querySelector("#birth-date-input");
+      const ageDisplay = document.getElementById("age-display");
+      const birthdateDayInput = document.querySelector("#birthdate-day");
+      const birthdateMonthInput = document.querySelector("#birthdate-month");
+      const birthdateYearInput = document.querySelector("#birthdate-year");
 
-      birthDateInput.addEventListener("change", (e) => {
-        const newDate = new Date();
-        const birthDate = new Date(e.target.value);
-        const ageYear = newDate.getFullYear() - birthDate.getFullYear();
-        const ageMonth = newDate.getMonth() - birthDate.getMonth();
-        const ageDay = newDate.getDate() - birthDate.getDay();
-        console.log(newDate.getUTCDay());
-      });
+      function calculateAge(birthdate) {
+        const birthDate = new Date(birthdate);
+        const currentDate = new Date();
+        // year calculation
+        let ageYears = currentDate.getFullYear() - birthDate.getFullYear();
+        const monthDiff = currentDate.getMonth() - birthDate.getMonth();
+        if (
+          monthDiff < 0 ||
+          (monthDiff === 0 && currentDate.getDate() < birthDate.getDate())
+        ) {
+          ageYears--;
+        }
+        // month calculation
+        let ageMonths = currentDate.getMonth() - birthDate.getMonth();
+        if (ageMonths < 0) {
+          ageMonths += 12; // Add 12 to the months difference
+        }
+        // days calculation and month modify
+        let ageDays = currentDate.getDate() - birthDate.getDate();
+        if (ageDays < 0) {
+          // Get the number of days in the previous month
+          const daysInPreviousMonth = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            0
+          ).getDate();
+          ageDays += daysInPreviousMonth;
+          ageMonths--;
+        }
+
+        // Pad single-digit month and day values with leading zeros
+        const monthFormatted = ageMonths.toString().padStart(2, "0");
+        const dayFormatted = ageDays.toString().padStart(2, "0");
+
+        return { year: ageYears, month: monthFormatted, day: dayFormatted };
+      }
+
+      const getTheAgeCalculated = () => {
+        const dobDay = parseInt(birthdateDayInput.value);
+        const dobMonth = parseInt(birthdateMonthInput.value);
+        const dobYear = parseInt(birthdateYearInput.value);
+        // check if all required input added
+        if (dobDay && dobMonth && dobYear && dobYear > 1000) {
+          const birthdate = `${dobYear}-${dobMonth}-${dobDay}`; // Format: YYYY-MM-DD
+          const calculatedDOB = calculateAge(birthdate);
+
+          ageDisplay.innerHTML = `Hey Dude! Your age <br/> <b> ${calculatedDOB.year}</b> years, <br/> <b>${calculatedDOB.month}</b> months
+          and <br/> <b>${calculatedDOB.day}</b> days.`;
+        }
+      };
     </script>
   </body>
 </html>
